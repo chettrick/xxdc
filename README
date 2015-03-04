@@ -1,0 +1,28 @@
+XXDC(1)                     General Commands Manual                    XXDC(1)
+
+NAME
+     xxdc - hexadecimal dump to C include file
+
+SYNOPSIS
+     xxdc [infile [outfile]]
+
+DESCRIPTION
+     The xxdc utility reads infile and writes a hexadecimal static array
+     definition and array length to outfile in a form suitable for inclusion
+     in a C program.
+
+     The array definition is named after infile as unsigned char infile[].
+     The array length is named after infile as unsigned int infile_len.
+
+EXIT STATUS
+     The xxdc utility exits 0 on success, and >0 if an error occurs.
+
+SEE ALSO
+     hexdump(1), od(1), xxd(1), ascii(7)
+
+AUTHORS
+     xxdc was originally written by Juergen Weigert
+     <jnweiger@informatik.uni-erlangen.de> as xxd(1) and flensed into its
+     current form by Chris Hettrick <chris@structfoo.com>.
+
+OpenBSD 5.7                      March 3, 2014                     OpenBSD 5.7

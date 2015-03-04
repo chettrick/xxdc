@@ -1,0 +1,56 @@
+.\" Copyright (c) 2013, 2014, 2015 Chris Hettrick <chris@structfoo.com>
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd $Mdocdate: March 3 2014 $
+.Dt XXDC 1
+.Os
+.Sh NAME
+.Nm xxdc
+.Nd hexadecimal dump to C include file
+.Sh SYNOPSIS
+.Nm
+.Op infile Op outfile
+.Sh DESCRIPTION
+The
+.Nm
+utility reads
+.Ar infile
+and writes a hexadecimal static array definition and array length to
+.Ar outfile
+in a form suitable for inclusion in a C program.
+.Pp
+The array definition is named after
+.Ar infile
+as
+.Em unsigned char infile[] .
+The array length is named after
+.Ar infile
+as
+.Em unsigned int infile_len .
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr hexdump 1 ,
+.Xr od 1 ,
+.Xr xxd 1 ,
+.Xr ascii 7
+.Sh AUTHORS
+.An -nosplit
+.Nm
+was originally written by
+.An Juergen Weigert Aq jnweiger@informatik.uni-erlangen.de
+as
+.Xr xxd 1
+and flensed into its current form by
+.An Chris Hettrick Aq chris@structfoo.com .
