@@ -5,12 +5,12 @@ CFLAGS+=-Wpointer-arith -Wuninitialized -Wmissing-prototypes
 CFLAGS+=-Wsign-compare -Wshadow -Wdeclaration-after-statement
 CFLAGS+=-Wfloat-equal -Wcast-align -Wundef -Wstrict-aliasing=2
 
-all: xxdc readme
+all: xxdc README
 
 xxdc: xxdc.c
 	${CC} ${CFLAGS} ${LDFLAGS} -o xxdc xxdc.c
 
-readme: xxdc.1
+README: xxdc.1
 	mandoc xxdc.1 | col -bx > README
 
 clean:
