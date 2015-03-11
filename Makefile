@@ -1,17 +1,21 @@
-CFLAGS+=-g
-CFLAGS+=-Wall -Wextra -std=c99 -pedantic -Wformat=2
-CFLAGS+=-Wmissing-declarations -Wstrict-prototypes -Wcast-qual
-CFLAGS+=-Wpointer-arith -Wuninitialized -Wmissing-prototypes
-CFLAGS+=-Wsign-compare -Wshadow -Wdeclaration-after-statement
-CFLAGS+=-Wfloat-equal -Wcast-align -Wundef -Wstrict-aliasing=2
+PROG=		xxdc
 
-all: xxdc README
+SRCS=		xxdc.c
 
-xxdc: xxdc.c
-	${CC} ${CFLAGS} ${LDFLAGS} -o xxdc xxdc.c
+CFLAGS+=	-g
+CFLAGS+=	-Wall -Wextra -std=c99 -pedantic -Wformat=2
+CFLAGS+=	-Wmissing-declarations -Wstrict-prototypes -Wcast-qual
+CFLAGS+=	-Wpointer-arith -Wuninitialized -Wmissing-prototypes
+CFLAGS+=	-Wsign-compare -Wshadow -Wdeclaration-after-statement
+CFLAGS+=	-Wfloat-equal -Wcast-align -Wundef -Wstrict-aliasing=2
+
+all: ${PROG} README
+
+${PROG}: ${SRCS}
+	${CC} ${CFLAGS} ${LDFLAGS} -o $@ ${SRCS}
 
 README: xxdc.1
 	mandoc xxdc.1 | col -bx > README
 
 clean:
-	rm -f xxdc xxdc.o README
+	rm -f ${PROG} xxdc.o README
