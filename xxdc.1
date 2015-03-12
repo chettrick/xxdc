@@ -12,7 +12,7 @@
 .\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 .\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .\"
-.Dd $Mdocdate: March 3 2014 $
+.Dd $Mdocdate: March 12 2015 $
 .Dt XXDC 1
 .Os
 .Sh NAME
@@ -20,15 +20,22 @@
 .Nd hexadecimal dump to C include file
 .Sh SYNOPSIS
 .Nm
-.Op infile Op outfile
+.Op infile
 .Sh DESCRIPTION
 The
 .Nm
 utility reads
 .Ar infile
 and writes a hexadecimal static array definition and array length to
-.Ar outfile
-in a form suitable for inclusion in a C program.
+the standard output in a form suitable for inclusion in a C program.
+If
+.Ar infile
+is a single dash
+.Pq Sq -
+or absent,
+.Nm
+reads from the standard input and does not write out
+the array definition nor the array length.
 .Pp
 The array definition is named after
 .Ar infile

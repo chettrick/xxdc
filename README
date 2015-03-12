@@ -4,12 +4,14 @@ NAME
      xxdc - hexadecimal dump to C include file
 
 SYNOPSIS
-     xxdc [infile [outfile]]
+     xxdc [infile]
 
 DESCRIPTION
      The xxdc utility reads infile and writes a hexadecimal static array
-     definition and array length to outfile in a form suitable for inclusion
-     in a C program.
+     definition and array length to the standard output in a form suitable for
+     inclusion in a C program.  If infile is a single dash (`-') or absent,
+     xxdc reads from the standard input and does not write out the array
+     definition nor the array length.
 
      The array definition is named after infile as unsigned char infile[].
      The array length is named after infile as unsigned int infile_len.
@@ -25,4 +27,4 @@ AUTHORS
      <jnweiger@informatik.uni-erlangen.de> as xxd(1) and flensed into its
      current form by Chris Hettrick <chris@structfoo.com>.
 
-OpenBSD 5.7                      March 3, 2014                     OpenBSD 5.7
+OpenBSD 5.7                     March 12, 2015                     OpenBSD 5.7
