@@ -18,4 +18,4 @@ README: xxdc.1
 	mandoc xxdc.1 | col -bx > README
 
 clean:
-	rm -f ${PROG} xxdc.o README
+	rm -f a.out [Ee]rrs mklog *.core y.tab.h ${PROG} xxdc.o README
