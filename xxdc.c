@@ -9,13 +9,12 @@
 #include <ctype.h>
 #include <err.h>
 #include <fcntl.h>
+#include <libgen.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 static void usage(void)__attribute__((__noreturn__));
-
-static char *pname;
 
 int
 main(int argc, char *argv[])
@@ -23,14 +22,10 @@ main(int argc, char *argv[])
 	FILE *		fp;
 	FILE *		fpo = stdout;
 	char *		pp;
+	char *		bname;
 	int		c, e;
 	uint64_t	count;
 	unsigned int	cols = 12;
-
-	pname = argv[0];
-	for (pp = pname; *pp;)
-		if (*pp++ == '/')
-			pname = pp;
 
 	while (argc >= 2) {
 		pp = argv[1] + (!strncmp(argv[1], "--", 2) && argv[1][2]);
@@ -71,14 +66,17 @@ main(int argc, char *argv[])
 			rewind(fpo);
 	}
 
+	if ((bname = basename(argv[1])) == NULL)
+		err(1, "%s", argv[1]);
+
 	if (fp != stdin) {
 		if (fprintf(fpo, "unsigned char %s",
-		    isdigit((int)argv[1][0]) ? "__" : "") < 0)
+		    isdigit((int)bname[0]) ? "__" : "") < 0)
 			err(3, NULL);
-		for (e = 0; (c = argv[1][e]) != 0; e++)
+		for (e = 0; (c = (int)bname[e]) != 0; e++)
 			if (putc(isalnum(c) ? c : '_', fpo) == EOF)
 				err(3, NULL);
-		if (fputs("[] = {\n", fpo) == EOF)
+		if (fprintf(fpo, "[] = {\n") == EOF)
 			err(3, NULL);
 	}
 
@@ -86,6 +84,7 @@ main(int argc, char *argv[])
 		if (fprintf(fpo, "0x%02x,%s", c,
 		    ((count % 12) > 0) ? " " : "\n") < 0)
 			err(3, NULL);
+
 	if (c == EOF && ferror(fp))
 		err(2, NULL);
 	if (count && fprintf(fpo, "%s",
@@ -96,9 +95,9 @@ main(int argc, char *argv[])
 
 	if (fp != stdin) {
 		if (fprintf(fpo, "unsigned int %s",
-		    isdigit((int)argv[1][0]) ? "__" : "") < 0)
+		    isdigit((int)bname[0]) ? "__" : "") < 0)
 			err(3, NULL);
-		for (e = 0; (c = argv[1][e]) != 0; e++)
+		for (e = 0; (c = (int)bname[e]) != 0; e++)
 			if (putc(isalnum(c) ? c : '_', fpo) == EOF)
 				err(3, NULL);
 		if (fprintf(fpo, "_len = %llu;\n", count - 1) < 0)
@@ -115,7 +114,7 @@ main(int argc, char *argv[])
 static void
 usage(void)
 {
-	(void)fprintf(stderr, "usage: %s [infile [outfile]]\n", pname);
+	(void)fprintf(stderr, "usage: xxdc [infile [outfile]]\n");
 	exit(1);
 	/* NOTREACHED */
 }
